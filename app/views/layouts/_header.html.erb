@@ -36,8 +36,8 @@
         <!--ユーザーログイン時の処理-->
         <% elsif user_signed_in? %>
           <li class="nav-item">
-            <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fab fa-octopus-deploy"></i> Top
+            <%= link_to mypage_path,class: 'nav-link text-light' do %>
+              <i class="fab fa-octopus-deploy"></i> MyPage
             <% end %>
           </li>
           <li class="nav-item">
@@ -87,7 +87,7 @@
 
           <li class="nav-item">
             <%= link_to users_guest_sign_in_path,class: 'nav-link text-light', method: :post  do %>
-              <i class="fas fa-sign-in-alt"></i> Guest_Log_in
+              <i class="fas fa-user-alt"></i> Guest_Log_in
             <% end %>
           </li>
         <% end %>

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     root 'homes#top'
     get 'about'=>'homes#about' ,as:'about'
 
+    get 'users/mypage' => 'users#show', as: 'mypage'
+
     devise_scope :user do
       post 'users/guest_sign_in', to: 'sessions#guest_sign_in'
     end

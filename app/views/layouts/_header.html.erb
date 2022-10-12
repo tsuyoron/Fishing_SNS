@@ -9,6 +9,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+
+        <!--管理者ログイン時の処理-->
         <% if admin_signed_in? %>
           <li class="nav-item active">
             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -30,15 +32,17 @@
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
           </li>
+
+        <!--ユーザーログイン時の処理-->
         <% elsif user_signed_in? %>
           <li class="nav-item">
             <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Home
+              <i class="fab fa-octopus-deploy"></i> Top
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> About
+            <i class="fas fa-fish"></i> Catch
             <% end %>
           </li>
           <li class="nav-item dropdown ">
@@ -54,9 +58,11 @@
           </li>
           <li class="nav-item">
             <%= link_to destroy_user_session_path,method: :delete,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Log_out
+              <i class="fas fa-sign-out-alt"></i> Log_out
             <% end %>
           </li>
+
+        <!--ログインしていない場合の処理-->
         <% else %>
           <li class="nav-item active">
             <%= link_to root_path,class: 'nav-link text-light' do %>
@@ -65,17 +71,23 @@
           </li>
           <li class="nav-item">
             <%= link_to root_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> About
+              <i class="fas fa-book-open"></i> About
             <% end %>
           </li>
           <li class="nav-item dropdown">
             <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Sign_up
+              <i class="fas fa-user-plus"></i> Sign_up
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to new_user_session_path,class: 'nav-link text-light' do %>
-              <i class="fas fa-home"></i> Log_in
+              <i class="fas fa-sign-in-alt"></i> Log_in
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to users_guest_sign_in_path,class: 'nav-link text-light', method: :post  do %>
+              <i class="fas fa-sign-in-alt"></i> Guest_Log_in
             <% end %>
           </li>
         <% end %>

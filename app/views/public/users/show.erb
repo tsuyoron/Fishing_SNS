@@ -16,6 +16,11 @@
         	  <th>introduction</th>
         	  <th><%= @user.introduction %></th>
           </tr>
+          <tr>
+              <%= link_to edit_mypage_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+                <i class="fas fa-user-cog"></i>
+              <% end %>
+          </tr>
         </tbody>
       </table>
     </div>

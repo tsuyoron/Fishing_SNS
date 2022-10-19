@@ -36,12 +36,12 @@
         <!--ユーザーログイン時の処理-->
         <% elsif user_signed_in? %>
           <li class="nav-item">
-            <%= link_to mypage_path,class: 'nav-link text-light' do %>
+            <%= link_to mypage_path(current_user),class: 'nav-link text-light' do %>
               <i class="fab fa-octopus-deploy"></i> MyPage
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to root_path,class: 'nav-link text-light' do %>
+            <%= link_to catches_path,class: 'nav-link text-light' do %>
             <i class="fas fa-fish"></i> Catch
             <% end %>
           </li>
@@ -70,7 +70,7 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to root_path,class: 'nav-link text-light' do %>
+            <%= link_to about_path,class: 'nav-link text-light' do %>
               <i class="fas fa-book-open"></i> About
             <% end %>
           </li>

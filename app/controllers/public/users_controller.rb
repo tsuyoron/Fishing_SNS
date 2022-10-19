@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
   # before_action :set_current_customer
 
   def show
+        @user = User.find(params[:id])
   end
 
   def edit

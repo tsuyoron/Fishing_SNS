@@ -1,1 +1,26 @@
-editpage
+<section class="inner">
+	<h2 class="section-ttl">ユーザ情報編集</h2>
+	<%= form_with model:@user, url: update_information_path do |f| %>
+		<!--<!%= render 'layouts/error_messages', resource: @customer %>-->
+		<table class="customer_info customer_form">
+			<tbody>
+				<tr>
+					<td><%= f.label :name, "名前", class: "user_name" %> </td>
+					<td colspan="2"><%= f.text_field :name, :placeholder =>"#{@user.name}" %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :email, "メールアドレス" %></td>
+					<td colspan="2"><%= f.email_field :email, autocomplete: "email", :placeholder =>"#{@user.email}" %></td>
+				</tr>
+				<tr>
+					<td><%= f.label :introduction, "ユーザ情報" %></td>
+					<td colspan="2"><%= f.text_field :introduction, autocomplete: "introduction", :placeholder =>"#{@user.introduction}" %></td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><%= f.submit "編集内容を保存する", class: "btn btn-primary" %></td>
+				</tr>
+			</tbody>
+		</table>
+	<% end %>
+</section>

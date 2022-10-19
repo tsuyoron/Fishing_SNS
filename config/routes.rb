@@ -21,8 +21,10 @@ Rails.application.routes.draw do
     get 'about'=>'homes#about' ,as:'about'
 
     get 'users/mypage/:id' => 'users#show', as: 'mypage'
-    get 'users/mypage/:id/edit' => 'users#edit', as: 'edit_mypage'
-    patch 'users/mypage/:id' => 'users#update'
+
+    # users/editのようにするとdeviseのルーティングとかぶってしまうためinformationを付け加えている。
+    get 'users/information/edit' => 'users#edit', as: 'edit_information'
+    patch 'users/information' => 'users#update', as: 'update_information'
 
     resources :catches
 

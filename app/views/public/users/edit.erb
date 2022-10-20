@@ -5,6 +5,10 @@
 		<table class="customer_info customer_form">
 			<tbody>
 
+
+					<td><%= f.label :プロフィール画像 %> </td>
+					<td colspan="2"><%= f.file_field :profile_image, accept: "profile_image/*" %></td>
+
 				<tr>
 					<td><%= f.label :name, "名前", class: "user_name" %> </td>
 					<td colspan="2"><%= f.text_field :name, :placeholder =>"#{@user.name}" %></td>

@@ -4,7 +4,7 @@ class Public::CatchesController < ApplicationController
   def show
     @catch = Catch.find(params[:id])
     @catch_new = Catch.new
-    # @post_comment = PostComment.new
+    @post_comment = PostComment.new
   end
 
   def index

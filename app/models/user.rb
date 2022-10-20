@@ -5,13 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :catches, dependent: :destroy
-  # has_many :favorites, dependent: :destroy
-  # has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
-  # has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  # has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  # has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
-  # has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
+  has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
 
   has_one_attached :profile_image
 
@@ -25,6 +25,7 @@ class User < ApplicationRecord
     end
   end
 
+  # プロフィール画像処理
   def get_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -33,19 +34,19 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  #   # ユーザーをフォローする
-  # def follow(user_id)
-  #   follower.create(followed_id: user_id)
-  # end
+  # ユーザーをフォローする
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
 
-  # # ユーザーのフォローを外す
-  # def unfollow(user_id)
-  #   follower.find_by(followed_id: user_id).destroy
-  # end
+  # ユーザーのフォローを外す
+  def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
+  end
 
-  # # フォローしていればtrueを返す
-  # def following?(user)
-  #   following_user.include?(user)
-  # end
+  # フォローしていればtrueを返す
+  def following?(user)
+    following_user.include?(user)
+  end
 
 end

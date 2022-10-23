@@ -1,4 +1,4 @@
-<div class='container px-5 px-sm-0'>
+<div class='container'>
     <% if @catch.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@catch.errors.count, "error") %>が原因でこの記事を保存できませんでした</h2>
@@ -11,15 +11,10 @@
     <% end %>
 
   <div class='row'>
-    <div class='col-md-3'>
-      <!--<h2>User info</h2>-->
-      <!--<!%= render 'users/info', user: current_user %>-->
-      <h2 class="mt-3">New catch</h2>
-      <%= render 'form', catch: @catch %>
-    </div>
-    <div class='col-md-8 offset-md-1'>
-      <h2>Catches</h2>
-      <%= render 'index', catches: @catches %>
-    </div>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+  		<h1>Editing Catch</h1>
+  		<%= render 'form', catch: @catch %>
+  		<%= link_to 'Show', @catch %> |
+  		<%= link_to 'Back', catches_path, class: "back" %>
   </div>
 </div>

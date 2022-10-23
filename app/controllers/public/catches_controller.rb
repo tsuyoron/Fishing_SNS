@@ -16,7 +16,7 @@ class Public::CatchesController < ApplicationController
     @catch = Catch.new(catch_params)
     @catch.user_id = current_user.id
     if @catch.save
-      redirect_to catch_path(@catch), notice: "You have created book successfully."
+      redirect_to catch_path(@catch), notice: "You have created catch successfully."
     else
       @catchs = Catch.all
       render 'index'
@@ -24,20 +24,20 @@ class Public::CatchesController < ApplicationController
   end
 
   def edit
-    @catch = Book.find(params[:id])
+    @catch = Catch.find(params[:id])
   end
 
   def update
     @catch = Catch.find(params[:id])
     if @catch.update(catch_params)
-      redirect_to catch_path(@catch), notice: "You have updated book successfully."
+      redirect_to catch_path(@catch), notice: "You have updated catch successfully."
     else
       render "edit"
     end
   end
 
   def destroy
-    @catch = Book.find(params[:id])
+    @catch = Catch.find(params[:id])
     @catch.destroy
     redirect_to catches_path
   end

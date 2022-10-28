@@ -2,19 +2,54 @@
   <div class="row">
     <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
       <h1>welcome to <i class="fas fa-fish"></i><strong>Fishing Sns</strong>!!</h1>
-      <p>In  <i class="fas fa-fish"></i><strong>Bookers</strong>, </p>
+      <p>In  <i class="fas fa-fish"></i><strong>Fishing Sns </strong>, </p>
       <p>you can share and exchange  your opinions , inpressions , and emotions</p>
-      <p> about various books!</p>
+      <p> about various Fishing Sns !</p>
       <div class="btn-wrapper col-10 mx-auto">
-        <div class="row">
-          <%= link_to 'Log in',new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-        </div>
-        <div class="row">
-          <%= link_to 'Sign Up',new_user_registration_path, class: "btn btn-success btn-sm btn-block mb-3 sign_up" %>
-        </div>
-        <div class="row">
-          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
-        </div>
+        <!--管理者ログイン時の処理-->
+        <% if admin_signed_in? %>
+          <div class="row">
+            <%= link_to 'Log in',new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+          </div>
+          <div class="row">
+            <%= link_to 'Sign Up',new_user_registration_path, class: "btn btn-success btn-sm btn-block mb-3 sign_up" %>
+          </div>
+          <div class="row">
+            <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+          </div>
+
+        <!--ユーザーログイン時の処理-->
+        <% elsif user_signed_in? %>
+          <div class="row">
+            <%= link_to mypage_path(current_user),class: 'btn btn-info btn-sm btn-block mb-3 mypage' do %>
+              <i class="fab fa-octopus-deploy"></i> MyPage
+            <% end %>
+          </div>
+          <div class="row">
+            <%= link_to catches_path,class: 'btn btn-success btn-sm btn-block mb-3 catch' do %>
+              <i class="fas fa-fish"></i> Catch
+            <% end %>
+          </div>
+          <div class="row">
+            <%= link_to destroy_user_session_path,method: :delete,class: 'btn btn-secondary btn-sm btn-block mb-3 log_out' do %>
+              <i class="fas fa-sign-out-alt"></i> Log_out
+            <% end %>
+          </div>
+
+        <!--ログインしていない場合の処理-->
+        <% else %>
+          <div class="row">
+            <%= link_to 'Log in',new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+          </div>
+          <div class="row">
+            <%= link_to 'Sign Up',new_user_registration_path, class: "btn btn-success btn-sm btn-block mb-3 sign_up" %>
+          </div>
+          <div class="row">
+            <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+          </div>
+        <% end %>
+
+
       </div>
     </div>
   </div>

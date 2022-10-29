@@ -16,18 +16,15 @@
         	  <th>introduction</th>
         	  <th><%= @user.introduction %></th>
           </tr>
-          <tr>
-            <th>
-              <%= link_to edit_information_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-                <i class="fas fa-user-cog"></i>
-              <% end %>
-            </th>
-          </tr>
-          <tr>
-            <th>
-
-            </th>
-          </tr>
+          <% if @user == current_user %>
+            <tr>
+              <th>
+                <%= link_to edit_information_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+                  <i class="fas fa-user-cog"></i>
+                <% end %>
+              </th>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

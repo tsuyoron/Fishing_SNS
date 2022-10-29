@@ -18,7 +18,7 @@ class Public::CatchesController < ApplicationController
     if @catch.save
       redirect_to catch_path(@catch), notice: "You have created catch successfully."
     else
-      @catchs = Catch.all
+      @catches = Catch.all
       render 'index'
     end
   end

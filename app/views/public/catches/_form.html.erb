@@ -1,5 +1,9 @@
 <%= form_with model:catch,local:true do |f| %>
   <div class="form-group">
+    <%= f.label :catch_image %>
+    <%= f.file_field :catch_image, accept: "catch_image/*" %>
+  </div>
+  <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: 'form-control catch_title' %>
   </div>

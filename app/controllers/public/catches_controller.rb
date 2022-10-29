@@ -45,7 +45,7 @@ class Public::CatchesController < ApplicationController
   private
 
   def catch_params
-    params.require(:catch).permit(:title,:body)
+    params.require(:catch).permit(:title,:body, :catch_image)
   end
 
   def ensure_correct_user

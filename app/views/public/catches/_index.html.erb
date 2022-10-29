@@ -11,7 +11,7 @@
     <% catches.each do |catch| %>
       <tr>
         <td><%= link_to mypage_path(catch.user)  do %>
-          <%= image_tag catch.user.get_image(100,100) %><br>
+          <%= image_tag catch.get_catch_image(100,100) %><br>
           <% end %>
         </td>
         <td><%= link_to catch.title,catch %></td>

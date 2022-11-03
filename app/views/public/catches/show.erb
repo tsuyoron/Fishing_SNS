@@ -9,59 +9,69 @@
     <div class='col-md-8 offset-md-1'>
   		<h2>Catch detail</h2>
   		<table class='table'>
-  		  <tr>
-          <td>
-            <%= link_to mypage_path(@catch.user) do %>
-              <%= image_tag @catch.get_catch_image(100,100) %><br>
-              <%= @catch.title %>
+  		  <tbody>
+    		  <!--タグ-->
+          <th>Predict_Name:</th>
+          <% @catch.tags.each do |tag| %>
+            <td class="label"><%= tag.name %></td>
+          <% end %>
+    		  <tr>
+            <td>
+              <%= link_to mypage_path(@catch.user) do %>
+                <%= image_tag @catch.get_catch_image(100,100) %><br>
+                <%= @catch.title %>
+              <% end %>
+            </td>
+            <td><%= @catch.body %></td>
+
+            <!--いいね機能の追加-->
+            <% if @catch.favorited_by?(current_user) %>
+              <td>
+                <%= link_to catch_favorites_path(@catch), method: :delete do %>
+                  ♥<%= @catch.favorites.count %>
+                <% end %>
+              </td>
+              <% else %>
+              <td>
+                <%= link_to catch_favorites_path(@catch), method: :post do %>
+                  ♡<%= @catch.favorites.count %>
+                <% end %>
+              </td>
             <% end %>
-          </td>
-          <td><%= @catch.body %></td>
 
-          <!--いいね機能の追加-->
-          <% if @catch.favorited_by?(current_user) %>
+            <!--コメント機能-->
             <td>
-              <%= link_to catch_favorites_path(@catch), method: :delete do %>
-                ♥<%= @catch.favorites.count %>
-              <% end %>
+              <p>コメント数：<%= @catch.post_comments.count %></p>
             </td>
-            <% else %>
-            <td>
-              <%= link_to catch_favorites_path(@catch), method: :post do %>
-                ♡<%= @catch.favorites.count %>
-              <% end %>
-            </td>
-          <% end %>
 
-          <!--コメント機能-->
-          <td>
-            <p>コメント数：<%= @catch.post_comments.count %></p>
-          </td>
-
-          <% if current_user == @catch.user %>
-            <td><%= link_to 'Edit', edit_catch_path(@catch), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Destroy', catch_path(@catch), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-          <% end %>
-        </tr>
-        <% @catch.post_comments.each do |post_comment| %>
-          <tr>
-            <td>
-              <%= link_to mypage_path(post_comment.user) do %>
-                <%= image_tag post_comment.user.get_image(50,50) %><br>
-                <%= post_comment.user.name %>
-              <% end %>
-            </td>
-            <td>
-              <%= post_comment.comment %>
-            </td>
-            <td>
-              <% if post_comment.user == current_user %>
-                <%= link_to 'Destroy', catch_post_comment_path(post_comment.catch, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
-              <% end %>
-            </td>
+            <% if current_user == @catch.user %>
+              <td><%= link_to 'Edit', edit_catch_path(@catch), class: "btn btn-sm btn-success" %></td>
+              <td><%= link_to 'Destroy', catch_path(@catch), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <% end %>
           </tr>
-        <% end %>
+
+          <% @catch.post_comments.each do |post_comment| %>
+            <tr class="table-info">
+              <td>
+                <%= link_to mypage_path(post_comment.user) do %>
+                  <%= image_tag post_comment.user.get_image(50,50) %><br>
+                  <%= post_comment.user.name %>
+                <% end %>
+              </td>
+              <td>
+                <%= post_comment.comment %>
+              </td>
+              <td>
+                <% if post_comment.user == current_user %>
+                  <%= link_to 'Destroy', catch_post_comment_path(post_comment.catch, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+  		  </tbody>
       </table>
+
+
 
       <div class='col-md-12'>
         <%= form_with model: [@catch, @post_comment] do |f| %>

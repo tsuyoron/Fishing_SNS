@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get 'users/mypage/:id' => 'users#show', as: 'mypage'
 
     # users/editのようにするとdeviseのルーティングとかぶってしまうためinformationを付け加えている。
-    get 'users/information/edit' => 'users#edit', as: 'edit_information'
+    get 'users/information/edit/:id' => 'users#edit', as: 'edit_information'
     patch 'users/information' => 'users#update', as: 'update_information'
 
     resources :catches, only: [:index,:show,:edit,:create,:destroy,:update] do

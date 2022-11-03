@@ -16,6 +16,11 @@ class Public::CatchesController < ApplicationController
     @catch = Catch.new(catch_params)
     @catch.user_id = current_user.id
     if @catch.save
+      tags = Vision.get_image_data(@catch.catch_image)
+      tags.each do |tag|
+        @catch.tags.create(name: tag)
+      end
+
       redirect_to catch_path(@catch), notice: "You have created catch successfully."
     else
       @catches = Catch.all
